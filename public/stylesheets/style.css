@@ -1,0 +1,43 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+.chat-wrapper {
+  display: block;
+  width: auto;
+  border: 2px solid purple;
+}
+
+.chat-top {
+  display: flex;
+  justify-content: center;
+  background-color: purple;
+}
+
+.chat-top p {
+  padding-right: 20vw;
+}
+
+.chat-main {
+  display: flex;
+  width: 100%;
+}
+
+.chat-box {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  align-items: center;
+}
+
+.users-box {
+  display: flex;
+  flex-direction: column;
+  width: 20%;
+  align-items: center;
+}

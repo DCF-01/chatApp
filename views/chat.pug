@@ -1,0 +1,18 @@
+extends layout
+
+block content
+    div(class="chat-wrapper")
+        div(class="chat-top")
+            p Chat Name
+            a(href="http://localhost:3000")
+                p Leave
+        div(class="chat-main")  
+            div(class="chat-box")
+                p(class="single-msg") Hello There!
+            div(class="users-box")
+                p(class="users-list")
+    form(id="chat-form")
+        input(type="text" id="msg" placeholder="enter message" required autocomplete="off")
+        button(type="submit") Send
+    script(src="/socket.io/socket.io.js")
+    script(src="/javascripts/main.js") 
