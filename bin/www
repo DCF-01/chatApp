@@ -8,6 +8,9 @@ var app = require('../app');
 var debug = require('debug')('chatapp:server');
 var http = require('http');
 const socket_io = require('socket.io');
+const formatMsg = require('../utils/messages');
+const { userJoin, getUser, userLeave, getRoomUsers} = require('../utils/users');
+const { use } = require('../routes');
 
 /**
  * Get port from environment and store in Express.
@@ -27,21 +30,53 @@ const io = socket_io(server);
 
 // run socket on client connection
 io.on('connection', socket => {
-  console.log('New connection at: ' + port);
+    console.log('New connection at: ' + port);
 
-  socket.emit('message', 'Welcome chat');
 
-  //notify all when client connects
-  socket.broadcast.emit('message', 'User has joined the chat');
+    socket.on('disconnect', () => {
+        const user = userLeave(socket.id);
 
-  socket.on('disconnect', () => {
-    io.emit('message', 'User has left the chat');
-  })
+        if(user){
+            // send user list and room data to client
+            io
+                .to(user.room)
+                .emit('roomInfo', {
+                    room: user.room,
+                    users: getRoomUsers(user.room)
+                });
+            // user exists send msg to client
+            io
+                .to(user.room)
+                .emit('message', formatMsg('ChatBot', `${user.username} has left the chat.`));
+        }
+    });
 
-  socket.on('chatMessage', (msg) => {
-    io.emit('message', msg);
-  })
+    socket.on('joinRoom', ({username, room}) => {
+        const user = userJoin(socket.id, username, room);
 
+        socket.join(user.room);
+
+        //welcome message
+        socket.emit('message', formatMsg('ChatBot', 'Welcome chat'));
+
+        //notify all when client connects
+        socket.broadcast
+            .to(user.room)
+            .emit('message', formatMsg('ChatBot', `${user.username} has joined the chat`));
+
+        // send user list and room data to client
+        io
+            .to(user.room)
+            .emit('roomInfo', {
+                room: user.room,
+                users: getRoomUsers(user.room)
+            });
+    });
+
+    socket.on('chatMessage', (msg) => {
+        io.emit('message', formatMsg('User', msg));
+    });
+    
 });
 
 

@@ -8,11 +8,20 @@ block content
                 p Leave
         div(class="chat-main")  
             div(class="chat-box")
-                p(class="single-msg") Hello There!
+                //- div(class="single-msg")
+                //-     p(class="meta")
+                //-         span(class="time")
+                //-     p(class="text")
             div(class="users-box")
-                p(class="users-list")
+                div(class="room-box")
+                    p Room Name:
+                    p(class="room-name")
+                div(class="users-list-box")
+                    p Users:
+                    p(class="users-list-single")
     form(id="chat-form")
         input(type="text" id="msg" placeholder="enter message" required autocomplete="off")
         button(type="submit") Send
     script(src="/socket.io/socket.io.js")
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/qs/6.9.6/qs.min.js" integrity="sha512-3TmPrquYLaAsUmZKXRARTDC5siWhLAdBVqNo4dWpDABBtLU62AaoTaQJEvjxjExcZYurO6i1dnK85k8pPIBlRg==" crossorigin="anonymous")
     script(src="/javascripts/main.js") 
