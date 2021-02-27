@@ -9,6 +9,7 @@ const chat_box = document.querySelector('.chat-box');
 const room_box = document.querySelector('.room-box');
 const users_list_box = document.querySelector('.users-list-box');
 const room_name = document.querySelector('.room-name');
+const submit_btn = document.getElementById('submit-btn');
 
 
 // get url strings
@@ -44,9 +45,10 @@ function createMessageElement(username, text, time){
 
 function clearDomTree(){
     let arr = Array.from(users_list_box.childNodes);
-    arr.forEach(element => {
-        users_list_box.removeChild(element);
-    });
+
+    for(let i = 1; i < arr.length; i++){
+        users_list_box.removeChild(arr[i]);
+    }
 }
 
 function updateUsersList(users){
@@ -94,4 +96,12 @@ form.addEventListener('submit', (e) => {
 
     socket.emit('chatMessage', msg_input.value);
 
+})
+
+submit_btn.addEventListener('keypress', (e) => {
+    if(e.key === 'Enter'){
+        e.preventDefault();
+
+        socket.emit('chatMessage', msg_input.value);
+    }
 })

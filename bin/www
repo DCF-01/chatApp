@@ -57,7 +57,7 @@ io.on('connection', socket => {
         socket.join(user.room);
 
         //welcome message
-        socket.emit('message', formatMsg('ChatBot', 'Welcome chat'));
+        socket.emit('message', formatMsg('ChatBot', `Welcome ${user.username}`));
 
         //notify all when client connects
         socket.broadcast

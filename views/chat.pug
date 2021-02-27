@@ -1,27 +1,28 @@
 extends layout
 
 block content
-    div(class="chat-wrapper")
-        div(class="chat-top")
-            p Chat Name
-            a(href="http://localhost:3000")
-                p Leave
-        div(class="chat-main")  
-            div(class="chat-box")
-                //- div(class="single-msg")
-                //-     p(class="meta")
-                //-         span(class="time")
-                //-     p(class="text")
-            div(class="users-box")
-                div(class="room-box")
-                    p Room Name:
-                    p(class="room-name")
-                div(class="users-list-box")
-                    p Users:
-                    p(class="users-list-single")
-    form(id="chat-form")
-        input(type="text" id="msg" placeholder="enter message" required autocomplete="off")
-        button(type="submit") Send
+    div(class="app-wrapper")
+        div(class="chat-wrapper")
+            div(class="chat-top")
+                p Customer Support Chat
+                a(href="http://localhost:3000")
+                    p Leave
+            div(class="chat-main")  
+                div(class="chat-box")
+                    //- div(class="single-msg")
+                    //-     p(class="meta")
+                    //-         span(class="time")
+                    //-     p(class="text")
+                div(class="users-box")
+                    div(class="room-box")
+                        p Room Name:
+                        p(class="room-name")
+                    div(class="users-list-box")
+                        p Users:
+                        p(class="users-list-single")
+        form(id="chat-form")
+            input(type="text" id="msg" placeholder="enter message" required autocomplete="off")
+            button(type="submit" id="submit-btn") Send
     script(src="/socket.io/socket.io.js")
     script(src="https://cdnjs.cloudflare.com/ajax/libs/qs/6.9.6/qs.min.js" integrity="sha512-3TmPrquYLaAsUmZKXRARTDC5siWhLAdBVqNo4dWpDABBtLU62AaoTaQJEvjxjExcZYurO6i1dnK85k8pPIBlRg==" crossorigin="anonymous")
     script(src="/javascripts/main.js") 
