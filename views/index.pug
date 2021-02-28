@@ -1,18 +1,38 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
-  form(action="chat", method="get")
-    div(class="form-control")
-      label(for="username") Username 
-      input(type="text" name="username" id="username" required)
-    div(class="form-control")
-      label(for="room") Room
-      select(name="room" id="room")
-        option(value="Room_1") Room_1   
-        option(value="Room_2") Room_2   
-        option(value="Room_3") Room_3  
-        option(value="Room_4") Room_4
-    div(class="form-control")
-      button(type="submit" id="button") Enter room  
+  div(class="block-wrapper")
+    div(class="title")
+      h1= title
+      div(id="title-underline")
+    div(class="login-wrapper")
+      //- form(action="chat", method="get")
+      //-   div(class="form-control")
+      //-     label(for="username") Username 
+      //-     input(type="text" name="username" id="username" required)
+      //-   div(class="form-control")
+      //-     label(for="room") Room
+      //-     select(name="room" id="room")
+      //-       option(value="Room_1") Room_1   
+      //-       option(value="Room_2") Room_2   
+      //-       option(value="Room_3") Room_3  
+      //-       option(value="Room_4") Room_4
+      //-   div(class="form-control")
+      //-     button(type="submit" id="button") Enter room  
+      <form action="chat" method="get">
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input class="form-control "type="text" name="username" id="username" required>
+        </div>
+        <div class="form-group">
+          <label for="room">Room</label>
+          <select class="form-control" name="room" id="room">
+            <option value="Room_1">Room_1</option>
+            <option value="Room_2">Room_2</option>
+            <option value="Room_3">Room_3</option>
+            <option value="Room_4">Room_4</option>
+            <option value="Room_5">Room_5</option>
+          </select>
+        </div>
+        <button type="submit" class="btn btn-primary" id="button">Enter room</button>
+      </form>

@@ -127,3 +127,29 @@ a {
 .users-box .users-list-single {
   color: white;
 }
+
+/* Login Page */
+.block-wrapper {
+  width: 60%;
+  border: 10px solid purple;
+  border-radius: 7px;
+  
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 10px 25px 30px 25px;
+
+}
+
+#title-underline {
+  height: 3px;
+  width: 40%;
+  background: purple;
+}
+
+.login-wrapper {
+  padding: 15px 25px 30px 25px;
+}

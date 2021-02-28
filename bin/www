@@ -9,7 +9,7 @@ var debug = require('debug')('chatapp:server');
 var http = require('http');
 const socket_io = require('socket.io');
 const formatMsg = require('../utils/messages');
-const { userJoin, getUser, userLeave, getRoomUsers} = require('../utils/users');
+const { userJoin, getUser, userLeave, getRoomUsers } = require('../utils/users');
 const { use } = require('../routes');
 
 /**
