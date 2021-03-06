@@ -1,4 +1,5 @@
 const mysql = require('mysql');
+const { toObjArray } = require('../utils/query');
 
 const connection = mysql.createConnection({
     host: 'localhost',
@@ -23,7 +24,7 @@ function handleTranscript(req, res, next) {
                 throw error;
             }
             else {
-                res.send(formatQuery(result));
+                res.send(toObjArray(result));
             }
         })
     }
@@ -32,17 +33,7 @@ function handleTranscript(req, res, next) {
     }
 };
 
-function formatQuery(data){
-    let arr = [];
-    let obj = {};
 
-    data.forEach(element => {
-        obj.username = element.username;
-        obj.message = element.message;
-        arr.push(obj);
-    });
-    return arr;
-}
 
 module.exports = {
     handleTranscript

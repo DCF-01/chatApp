@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-const { handleTranscript } = require('../controllers/transcript');
+const { handleTranscript } = require('../models/transcript');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
