@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+const mysql = require('mysql2/promise')
 const { handleTranscript } = require('../models/transcript');
 const { handleEmail } = require('../controllers/mail');
 
@@ -12,20 +13,21 @@ router.get('/chat', function(req, res, next) {
     res.render('chat', { title: 'Chat Page' });
 });
 
-router.get('/transcript', function(req, res, next) {
+router.get('/transcript', async function(req, res, next) {
+    
     handleTranscript(req, res, next);
+    
 });
 
 router.get('/send', function(req, res, next) {
     try {
-        let msg = {
-            from: 'admin@paralax.mk',
-            to: 'itxtechnologies.mk@gmail.com',
-            subject: 'aws ses test', // Subject line
-            text: req.query.message
-        }
-
-        handleEmail(req.query.key, msg, 'itxtechnologies.mk@gmail.com');
+        // let msg = {
+        //     from: 'admin@paralax.mk',
+        //     to: 'itxtechnologies.mk@gmail.com',
+        //     subject: 'aws ses test', // Subject line
+        //     text: req.query.message
+        // }
+        handleEmail(req.query);
         res.status(200).send('Email has been sent');
     }
     catch (err){
@@ -37,4 +39,4 @@ router.get('/send', function(req, res, next) {
 
 
 
-module.exports = router;
+module.exports = router

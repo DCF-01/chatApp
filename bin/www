@@ -11,16 +11,8 @@ const socket_io = require('socket.io');
 const formatMsg = require('../utils/messages');
 const { userJoin, getUser, userLeave, getRoomUsers } = require('../utils/users');
 const { use } = require('../routes');
-const mysql = require('mysql');
-const connection = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: 'radant098',
-    database: 'chatApp'
-});
-
-
-
+const mysql = require('mysql2/promise');
+const {addRecord} = require('../models/message_model');
 
 
 /**
@@ -86,18 +78,7 @@ io.on('connection', socket => {
 
     socket.on('chatMessage', (msg) => {
         try {
-            connection.connect();
-            let sql = 'INSERT INTO Messages (userID, message) VALUES (1, ' + mysql.escape(msg) + ');';
-            // connection.query('INSERT INTO Users (username) VALUES (\'Pero\')');
-            connection.query(sql, 
-                function (err, res, fields) {
-                    if(err){
-                        throw err;
-                    }
-                    else {
-                        console.log(res, fields);
-                    }
-                });
+            addRecord(msg);
         }
         catch(err) {
             console.log(err);
@@ -107,9 +88,6 @@ io.on('connection', socket => {
         // let output = connection.query('SELECT * FROM Users');
         // console.log(output);
         
-        connection.end((err) => {
-            console.log(err);
-        });
 
         io.emit('message', formatMsg('User', msg));
     });

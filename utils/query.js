@@ -1,16 +1,16 @@
 // to obj array
-function toObjArray(data){
-    let arr = [];
-    let obj = {};
+function formatEmailQuery(data){
+    let str = '';
+    let i = 1;
 
     data.forEach(element => {
-        obj.username = element.username;
-        obj.message = element.message;
-        arr.push(obj);
+        str += element.username + ': ';
+        str += element.message + '. ';
+        str += '\n'
     });
-    return arr;
+    return str;
 }
 
 module.exports = {
-    toObjArray
+    formatEmailQuery
 }

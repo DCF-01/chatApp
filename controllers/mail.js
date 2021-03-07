@@ -12,12 +12,11 @@ let transporter = nodemailer.createTransport({
 });
 
 class Email {
-    constructor(message, toAddress){
+    constructor (message) {
         this.message = message;
-        this.message.to = toAddress
     }
 
-    cb(error, info){
+    cb (error, info) {
         if(error){
             console.log(error);
         }
@@ -30,9 +29,16 @@ class Email {
     }
 }
 
-function handleEmail(key, message, toAddress){
-    if(key === process.env.SECRET_KEY){
-        const new_email = new Email(message, toAddress);
+function handleEmail(obj) {
+    if(obj.key === process.env.SECRET_KEY){
+        const msg = {
+            from: obj.from,
+            to: obj.to,
+            subject: obj.subject,
+            text: obj.text
+        }
+        
+        const new_email = new Email(msg);
         new_email.send();
         return true
     }
@@ -42,5 +48,6 @@ function handleEmail(key, message, toAddress){
 }
 
 module.exports = {
-    handleEmail
+    handleEmail,
+    Email
 }
