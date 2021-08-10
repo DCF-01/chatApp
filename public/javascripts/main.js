@@ -94,7 +94,10 @@ socket.on('message', message => {
 form.addEventListener('submit', (e) => {
     e.preventDefault();
 
-    socket.emit('chatMessage', msg_input.value);
+    let URLparams = new URLSearchParams(window.location.search);
+    let username = URLparams.get('username');
+
+    socket.emit('chatMessage', msg_input.value, username );
 
 })
 

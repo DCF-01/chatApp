@@ -76,20 +76,15 @@ io.on('connection', socket => {
             });
     });
 
-    socket.on('chatMessage', (msg) => {
+    socket.on('chatMessage', (msg, username) => {
         try {
             addRecord(msg);
         }
         catch(err) {
             console.log(err);
         }
-        
 
-        // let output = connection.query('SELECT * FROM Users');
-        // console.log(output);
-        
-
-        io.emit('message', formatMsg('User', msg));
+        io.emit('message', formatMsg(username, msg));
     });
     
 });
